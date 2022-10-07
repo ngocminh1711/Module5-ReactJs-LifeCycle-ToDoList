@@ -1,23 +1,39 @@
 import logo from './logo.svg';
 import './App.css';
+import ToDo from "./ToDo/ToDo";
+import {useState} from "react";
+
+const props = {
+    h1: 'To Do List',
+    nameBtn: 'Add'
+}
+const toDoList = []
+const works = {
+    work: ''
+}
+
+
 
 function App() {
+    const [work, setWork] = useState(works)
+
+    const handleChange = (e) => {
+        let toDoWork = e.target.value
+       setWork({work: toDoWork})
+    }
+    const handleToDo = () => {
+        toDoList.push(work)
+
+    }
+    console.log(toDoList)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <ToDo
+        props={props}
+        onClick={handleToDo}
+        onChange={handleChange}
+        children={toDoList}
+        />
     </div>
   );
 }
